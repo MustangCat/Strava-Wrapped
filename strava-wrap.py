@@ -5,7 +5,6 @@ import numpy as np
 import seaborn as sns
 import plotly.express as px
 import random
-from annotated_text import annotated_text
 
 
 # Page Title and Layout Configuration
@@ -98,7 +97,10 @@ if data_file is not None:
 
             
                 # 'Your Most Activity 2024' section
-                annotated_text(("Strava Unwrapped", "Time Spent Activity Dominates Your Workout Routine"))
+                st.markdown("""
+<span style="font-weight:bold; font-size:18px;">Strava Unwrapped:</span> 
+<span style="font-size:16px; color:gray;">Time Spent Activity Dominates Your Workout Routine</span>
+""", unsafe_allow_html=True)
                 with st.container():
                     col1, col2, col3 = st.columns([1.5, 1, 1], gap="small")
 
@@ -139,7 +141,10 @@ if data_file is not None:
                 st.warning("No activity type data available for 2024.")
 
             #"Your Time Spent on Activities in 2024"
-            annotated_text(("Activity Breakdown", "Percentage of Time Spent on Different Types of Workouts"))
+            st.markdown("""
+<span style="font-weight:bold; font-size:18px;">Activity Breakdown:</span> 
+<span style="font-size:16px; color:gray;">Percentage of Time Spent on Different Types of Workouts</span>
+""", unsafe_allow_html=True)
             if "Activity Type" in data.columns and "Elapsed Time" in data.columns:
                 activity_time = data.groupby("Activity Type")["Elapsed Time"].sum().reset_index()
                 activity_time["Elapsed Time (hrs)"] = activity_time["Elapsed Time"] / 3600  # Convert from seconds to hours
@@ -206,7 +211,10 @@ if data_file is not None:
             st.markdown("---")
 
             #"Your Trends Spend Time Activity in 2024"
-            annotated_text(("Tracking Your Fitness Journey","Key Activity Trends in 2024"))
+            st.markdown("""
+<span style="font-weight:bold; font-size:18px;">Tracking Your Fitness Journey:</span> 
+<span style="font-size:16px; color:gray;">Key Activity Trends in 2024</span>
+""", unsafe_allow_html=True)
             try:
                 if "Activity Type" in data_2024.columns and "Elapsed Time" in data_2024.columns:
                     # Prepare data for line chart
@@ -264,7 +272,10 @@ if data_file is not None:
             st.markdown("---")
 
             #"Your Days Spot Activity in 2024"
-            annotated_text(("Your Active Days in 2024","Your 2024 Workout Time Breakdown at a Glance","#afa"))
+            st.markdown("""
+<span style="font-weight:bold; font-size:18px;">Your Active Days in 2024:</span> 
+<span style="font-size:16px; color:gray;">Your 2024 Workout Time Breakdown at a Glance</span>
+""", unsafe_allow_html=True)
             try:
                 if "Activity Date" in data_2024.columns and "Activity ID" in data_2024.columns:
                     # Prepare data for the heatmap
@@ -295,7 +306,10 @@ if data_file is not None:
                     st.pyplot(plt)
 
                     # Interactivity using Streamlit widgets
-                    annotated_text(("Pick Date","Information in Calendar","#edebec"))
+                    st.markdown("""
+<span style="font-weight:bold; font-size:18px;">Pick Date:</span> 
+<span style="font-size:16px; color:gray;">Information in Calendar</span>
+""", unsafe_allow_html=True)
                     selected_date = st.date_input(
                         "Select a date to view details:",
                         min_value=data_2024["start_date"].min(),
@@ -321,7 +335,10 @@ if data_file is not None:
 
 
             #"Next Activity for Your Stay Fit"
-            annotated_text(("Stay Fit with a Surprise","Random Clicks for Fresh Workout Ideas Next Time","#f53874"))
+            st.markdown("""
+<span style="font-weight:bold; font-size:18px;">Stay Fit with a Surprise:</span> 
+<span style="font-size:16px; color:gray;">Random Clicks for Fresh Workout Ideas Next Time</span>
+""", unsafe_allow_html=True)
             try:
                 # Generate random activity suggestion
                 if "Activity Type" in data_2024.columns:
