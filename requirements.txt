@@ -4,4 +4,3 @@ matplotlib
 numpy
 seaborn
 plotly
-streamlit-annotated-text
