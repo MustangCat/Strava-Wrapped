@@ -37,14 +37,26 @@ with st.sidebar:
     st.subheader("📤 Upload Your Strava Activity File")
     data_file = st.file_uploader("Upload your Strava activity file (CSV)", type=["csv"])
 
-if data_file is not None:
+    # Checkbox to use example file
+    use_example_file = st.checkbox(
+        "Use example file", True, help="Use an in-built example file to demo the app"
+    )
+
+    # Default example file values
+    strava_data_example = "activities.csv"
+
+    if use_example_file:
+        uploaded_file = strava_data_example
+
+if uploaded_file is not None:
     # Check if the uploaded file is named 'activities.csv'
-    if data_file.name == "activities.csv":
+    if uploaded_file == strava_data_example or uploaded_file.name == "activities.csv":
         # Read CSV file
         try:
-            data = pd.read_csv(data_file)
+            data = pd.read_csv(uploaded_file)
             # st.success("'activities.csv' uploaded successfully!")
             # st.write("Preview of your data:", data.head())
+
 
             # Calculate metrics for 'Your Most Activity 2024'
             data["start_date"] = pd.to_datetime(data["Activity Date"], errors='coerce')
@@ -358,3 +370,7 @@ if data_file is not None:
             st.error(f"An error occurred while processing the file: {e}")
     else:
         st.error("Please upload a file named 'activities.csv'.")
+
+
+
+
